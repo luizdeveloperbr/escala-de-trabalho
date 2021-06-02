@@ -10,6 +10,7 @@
     "lint": "eslint --cache --format codeframe --ext mjs,vue,js src test"
   },
   "dependencies": {
+    "moment": "^2.29.1",
     "vue": "^2"
   },
   "devDependencies": {

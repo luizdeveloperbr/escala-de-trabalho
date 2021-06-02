@@ -1,9 +1,11 @@
 <script>
+import moment from 'moment';
+
 export default {
   name: 'App',
   data() {
     return {
-      texto: 'Escala',
+      texto: moment().format('L'),
     };
   },
 };
