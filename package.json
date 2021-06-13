@@ -4,14 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --cache --format codeframe --ext mjs,vue,js src test"
   },
   "dependencies": {
+    "bulma": "^0.9.2",
     "moment": "^2.29.1",
-    "vue": "^2"
+    "vue": "^2",
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
     "@neutrinojs/airbnb-base": "^9.5.0",
