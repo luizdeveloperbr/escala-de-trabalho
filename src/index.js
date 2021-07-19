@@ -5,7 +5,7 @@ import { rtdbPlugin } from 'vuefire';
 import App from './App.vue';
 import router from './router';
 
-Vue.use(rtdbPlugin)
+Vue.use(rtdbPlugin);
 Vue.use(mdiVue, {
   icons: mdijs,
 });
