@@ -1,4 +1,4 @@
-const airbnbBase = require('@neutrinojs/airbnb-base');
+//const airbnbBase = require('@neutrinojs/airbnb-base');
 const vue = require('@neutrinojs/vue');
 const jest = require('@neutrinojs/jest');
 
@@ -7,7 +7,7 @@ module.exports = {
     root: __dirname,
   },
   use: [
-    airbnbBase(),
+//    airbnbBase(),
     vue({
       html: {
         title: 'escala'
