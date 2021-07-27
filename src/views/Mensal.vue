@@ -39,7 +39,7 @@
         <tr
           v-for="colab in banco"
           :class="{ 'is-selected': colab.edit }"
-          :key="colab.key"
+          :key="banco.indexOf(colab['.key'])"
         >
           <td class="p-0 print_cls">
             <a
@@ -52,48 +52,94 @@
           <td>{{ colab.nome }}</td>
           <td></td>
           <td class="has-text-centered hora">
-            <time-entrance
+            <horario
               v-if="colab.edit"
               :allow="setDom_0"
-              :get-value="colab"
-            ></time-entrance>
+              :get-value="colab['.key']"
+              :id="$refs.d_0.W"
+            ></horario>
             <span v-else>{{ colab.domingos[$refs.d_0.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
-            <input type="date" v-if="edit" />
-            <span v-else>seg,19/07</span>
+            <folga
+             v-if="colab.edit"
+             :get-value="colab['.key']" 
+             :allow="setDom_0"
+             :id="$refs.d_0.W"
+            ></folga>
+            <span v-else>{{ colab.domingos[$refs.d_0.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
           <td class="has-text-centered hora">
-            <input type="text" v-if="edit" placeholder="horario domingo 1" />
-            <span v-else>07:00-11:00//11:15-13-15 </span>
+             <horario
+              v-if="colab.edit"
+              :allow="setDom_1"
+              :get-value="colab['.key']"
+              :id="$refs.d_1.W"
+            ></horario>
+            <span v-else>{{ colab.domingos[$refs.d_1.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
-            <input type="date" v-if="edit" />
-            <span v-else>seg,19/07</span>
+            <folga
+             v-if="colab.edit"
+             :get-value="colab['.key']" 
+             :allow="setDom_1"
+             :id="$refs.d_1.W"
+            ></folga>
+            <span v-else>{{ colab.domingos[$refs.d_1.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
           <td class="has-text-centered hora">
-            <input type="text" v-if="edit" placeholder="horario domingo 2" />
-            <span v-else>07:00-11:00//11:15-13-15 </span>
+            <horario
+              v-if="colab.edit"
+              :allow="setDom_2"
+              :get-value="colab['.key']"
+              :id="$refs.d_2.W"
+            ></horario>
+            <span v-else>{{ colab.domingos[$refs.d_2.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
-            <input type="date" v-if="edit" />
-            <span v-else>seg,19/07</span>
+            <folga
+             v-if="colab.edit"
+             :get-value="colab['.key']" 
+             :allow="setDom_2"
+             :id="$refs.d_2.W"
+            ></folga>
+            <span v-else>{{ colab.domingos[$refs.d_2.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
           <td class="has-text-centered hora">
-            <input type="text" v-if="edit" placeholder="horario domingo 3" />
-            <span v-else>07:00-11:00//11:15-13-15 </span>
+            <horario
+              v-if="colab.edit"
+              :allow="setDom_3"
+              :get-value="colab['.key']"
+              :id="$refs.d_3.W"
+            ></horario>
+            <span v-else>{{ colab.domingos[$refs.d_3.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
-            <input type="date" v-if="edit" />
-            <span v-else>seg,19/07</span>
+            <folga
+             v-if="colab.edit"
+             :get-value="colab['.key']" 
+             :allow="setDom_3"
+             :id="$refs.d_3.W"
+            ></folga>
+            <span v-else>{{ colab.domingos[$refs.d_3.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
           <td class="has-text-centered hora" v-if="condFivDom">
-            <input type="text" v-if="edit" placeholder="horario domingo 4" />
-            <span v-else>07:00-11:00//11:15-13-15 </span>
+             <horario
+              v-if="colab.edit"
+              :allow="setDom_3"
+              :get-value="colab['.key']"
+              :id="$refs.d_3.W"
+            ></horario>
+            <span v-else>{{ colab.domingos[$refs.d_3.W].hora }}</span>
           </td>
           <td v-if="condFivDom" class="dia has-text-centered">
-            <input type="date" v-if="edit" />
-            <span v-else>seg,19/07</span>
+            <folga
+             v-if="colab.edit"
+             :get-value="colab['.key']" 
+             :allow="setDom_3"
+             :id="$refs.d_3.W"
+            ></folga>
+            <span v-else>{{ colab.domingos[$refs.d_3.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
         </tr>
       </table>
@@ -118,7 +164,8 @@
 import moment from 'moment';
 import { db } from '../db';
 import domingo from '../components/domingo.vue';
-import timeEntrance from '../components/timeEntrance.vue';
+import horario from '../components/horario.vue';
+import folga from '../components/folga.vue';
 
 const setores = db.ref('setores');
 export default {
@@ -126,18 +173,22 @@ export default {
   data() {
     return {
       banco: [],
-      setDom_0: true,
+      setDom_0: false,
+      setDom_1: false,
+      setDom_2: false,
+      setDom_3: false,
+      setDom_4: false,
       edit: true,
     };
   },
   methods: {
     editColab(idcol, coladKey) {
-      if (idcol == true) {
+      if (idcol === true) {
         this.$firebaseRefs.banco.child(coladKey).update({ edit: false });
       } else {
         this.$firebaseRefs.banco.child(coladKey).update({ edit: true });
       }
-      return console.log('Changed');
+      return 'Changed';
     },
   },
   computed: {
@@ -147,13 +198,14 @@ export default {
     condFivDom() {
       return (
         moment(this.$parent.monthpick, 'MMMM').startOf('week').month()
-        == moment(this.$parent.monthpick, 'MMMM').add(4, 'w').month()
+        === moment(this.$parent.monthpick, 'MMMM').add(4, 'w').month()
       );
     },
   },
   components: {
     domingo,
-    timeEntrance,
+    horario,
+    folga
   },
   watch: {
     id: {

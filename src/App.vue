@@ -28,6 +28,7 @@ export default {
                 class="navbar-item"
                 v-for="s in setores"
                 :to="{ name: 'Mensal', params: { setor: s } }"
+                :key="setores.indexOf(s)"
             >
                 {{s}}
               </router-link>
@@ -37,7 +38,11 @@ export default {
         <div class="navbar-item">
         <div class="select">
         <select v-model="monthpick">
-        <router-link :to="{name: 'Mensal', query: {mes: mes}}" v-for="mes in meses" tag="option">{{mes}}</router-link>
+        <router-link
+        :to="{name: 'Mensal', query: {mes: mes}}"
+        v-for="mes in meses" tag="option"
+        :key="meses.indexOf(mes)">{{mes}}
+        </router-link>
         </select>
         </div>
         </div>

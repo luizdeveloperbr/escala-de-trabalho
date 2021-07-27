@@ -4,12 +4,11 @@
     <div class="field has-addons">
       <div class="select is-small">
         <select
-          v-bind:value="value"
           class="is-focused"
-          v-on:input="$emit('input', $event.target.value)"
+          @change="updateHora"
           v-model="ipt"
         >
-          <option v-for="h in list" :value="h">{{ h }}</option>
+          <option v-for="h in list" :key="list.indexOf(h.hora)">{{ h.hora }}</option>
         </select>
       </div>
 
@@ -20,19 +19,30 @@
   </fieldset>
 </template>
 <script>
+import {db} from '../db'
+const banco = db.ref('setores')
 export default {
-  name: 'time-entrance',
+  name: 'horario',
   props: ['value', 'getValue', 'allow'],
+  firebase:{
+    list: db.ref('horarios/master')
+  },
   data() {
     return {
-      ipt: this.getValue,
-      list: ['manhã', 'tarde'],
+      list: [],
+      ipt: '',
     };
   },
   methods: {
     rem() {
       this.ipt = '';
       this.$emit('input', '');
+    },
+    updateHora() {
+      var obj = {hora: this.ipt}
+      var url = this.$route.params.setor + '/organico/' + this.getValue + "/domingos/" + this.$attrs.id;
+      console.log(url + '-' + obj.hora)
+      return banco.child(url).update(obj);
     },
   },
 };

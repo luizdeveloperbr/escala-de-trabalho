@@ -17,6 +17,7 @@
     "mdi-vue": "^3.0.7",
     "moment": "^2.29.1",
     "vue": "^2",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.5.1",
     "vuefire": "^2.2.5"
   },
