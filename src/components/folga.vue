@@ -18,11 +18,12 @@ const banco = db.ref('setores')
 
 export default {
   name: "folga",
-  props: ["value", "getValue", "allow"],
+  props: ["value", "getValue", "getReal"],
   //usar as funçães de mine max com v-bind no input
   data(){
    return {
-     nome: '',
+     nome: this.getReal,
+     allow: false,
      min:'',
      max:''
      }

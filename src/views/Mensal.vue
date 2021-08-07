@@ -54,7 +54,7 @@
           <td class="has-text-centered hora">
             <horario
               v-if="colab.edit"
-              :allow="setDom_0"
+              :get-real="colab.domingos[$refs.d_0.W].hora"
               :get-value="colab['.key']"
               :id="$refs.d_0.W"
             ></horario>
@@ -64,7 +64,7 @@
             <folga
              v-if="colab.edit"
              :get-value="colab['.key']" 
-             :allow="setDom_0"
+             :get-real="colab.domingos[$refs.d_0.W].dia"
              :id="$refs.d_0.W"
             ></folga>
             <span v-else>{{ colab.domingos[$refs.d_0.W].dia | moment('ddd, DD/MMM')}}</span>
@@ -72,7 +72,7 @@
           <td class="has-text-centered hora">
              <horario
               v-if="colab.edit"
-              :allow="setDom_1"
+              :get-real="colab.domingos[$refs.d_1.W].hora"
               :get-value="colab['.key']"
               :id="$refs.d_1.W"
             ></horario>
@@ -82,7 +82,7 @@
             <folga
              v-if="colab.edit"
              :get-value="colab['.key']" 
-             :allow="setDom_1"
+             :get-real="colab.domingos[$refs.d_1.W].dia"
              :id="$refs.d_1.W"
             ></folga>
             <span v-else>{{ colab.domingos[$refs.d_1.W].dia | moment('ddd, DD/MMM')}}</span>
@@ -90,7 +90,7 @@
           <td class="has-text-centered hora">
             <horario
               v-if="colab.edit"
-              :allow="setDom_2"
+              :get-real="colab.domingos[$refs.d_2.W].hora"
               :get-value="colab['.key']"
               :id="$refs.d_2.W"
             ></horario>
@@ -100,7 +100,7 @@
             <folga
              v-if="colab.edit"
              :get-value="colab['.key']" 
-             :allow="setDom_2"
+             :get-real="colab.domingos[$refs.d_2.W].dia"
              :id="$refs.d_2.W"
             ></folga>
             <span v-else>{{ colab.domingos[$refs.d_2.W].dia | moment('ddd, DD/MMM')}}</span>
@@ -108,7 +108,7 @@
           <td class="has-text-centered hora">
             <horario
               v-if="colab.edit"
-              :allow="setDom_3"
+              :get-real="colab.domingos[$refs.d_3.W].hora"
               :get-value="colab['.key']"
               :id="$refs.d_3.W"
             ></horario>
@@ -118,7 +118,7 @@
             <folga
              v-if="colab.edit"
              :get-value="colab['.key']" 
-             :allow="setDom_3"
+             :get-real="colab.domingos[$refs.d_3.W].dia"
              :id="$refs.d_3.W"
             ></folga>
             <span v-else>{{ colab.domingos[$refs.d_3.W].dia | moment('ddd, DD/MMM')}}</span>
@@ -126,20 +126,20 @@
           <td class="has-text-centered hora" v-if="condFivDom">
              <horario
               v-if="colab.edit"
-              :allow="setDom_3"
+              :get-real="colab.domingos[$refs.d_4.W].hora"
               :get-value="colab['.key']"
-              :id="$refs.d_3.W"
+              :id="$refs.d_4.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_3.W].hora }}</span>
+            <span v-else>{{ colab.domingos[$refs.d_4.W].hora }}</span>
           </td>
           <td v-if="condFivDom" class="dia has-text-centered">
             <folga
              v-if="colab.edit"
              :get-value="colab['.key']" 
-             :allow="setDom_3"
-             :id="$refs.d_3.W"
+             :get-real="colab.domingos[$refs.d_4.W].dia"
+             :id="$refs.d_4.W"
             ></folga>
-            <span v-else>{{ colab.domingos[$refs.d_3.W].dia | moment('ddd, DD/MMM')}}</span>
+            <span v-else>{{ colab.domingos[$refs.d_4.W].dia | moment('ddd, DD/MMM')}}</span>
           </td>
         </tr>
       </table>
