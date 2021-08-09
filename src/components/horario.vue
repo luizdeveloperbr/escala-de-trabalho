@@ -5,7 +5,7 @@
       <div class="field has-addons">
         <div class="select is-small">
           <select class="is-focused" @change="updateHora" v-model="ipt">
-            <option v-for="h in list" :key="list.indexOf(h.hora)">
+            <option v-for="h in list">
               {{ h.hora }}
             </option>
           </select>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       list: [],
-      atual: "",
+      //atual: "",
       anterior: null,
       penultimo: "",
       ipt: this.getReal,
@@ -59,20 +59,20 @@ export default {
     },
   },
   created() {
-    var _atual =
-      `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
-      this.$attrs.id;
+    //var _atual =
+     // `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
+    //  this.$attrs.id;
     var _anterior =
       `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
       Number(this.$attrs.id - 1);
     var _penultimo =
       `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
       Number(this.$attrs.id - 2);
-    this.$rtdbBind("atual", banco.child(_atual));
+    //this.$rtdbBind("atual", banco.child(_atual));
     this.$rtdbBind("anterior", banco.child(_anterior));
     this.$rtdbBind("penultimo", banco.child(_penultimo));
 
-    return [this.atual.hora, this.anterior.hora];
+    return [this.penultimo.hora, this.anterior.hora];
   },
 };
 </script>

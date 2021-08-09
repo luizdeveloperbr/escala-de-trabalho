@@ -4,7 +4,7 @@
       <table class="table is-bordered">
         <tr id="head-list" class="has-text-centered">
           <td class="print_cls"></td>
-          <td></td>
+          
           <td></td>
           <td></td>
           <td>Domingo</td>
@@ -19,7 +19,7 @@
           <td v-if="condFivDom"></td>
         </tr>
         <tr id="head-list" class="has-text-centered">
-          <td class="print_cls"></td>
+          
           <td class="mat-ret">Matricula</td>
           <td>Colaborador</td>
           <td class="mat-ret">Retorno</td>
@@ -39,17 +39,9 @@
         <tr
           v-for="colab in banco"
           :class="{ 'is-selected': colab.edit }"
-          :key="banco.indexOf(colab['.key'])"
         >
-          <td class="p-0 print_cls">
-            <a
-              class="button is-rounded is-success is-small"
-              @click="editColab(colab.edit, colab['.key'])"
-              ><mdicon name="alert" size="22"
-            /></a>
-          </td>
           <td>{{ colab.mat }}</td>
-          <td>{{ colab.nome }}</td>
+          <td><a @click="editColab(colab.edit, colab['.key'])">{{ colab.nome }}</a></td>
           <td></td>
           <td class="has-text-centered hora">
             <horario
@@ -58,7 +50,7 @@
               :get-value="colab['.key']"
               :id="$refs.d_0.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_0.W].hora }}</span>
+            <span v-else style="max-width: 120px">{{ colab.domingos[$refs.d_0.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
             <folga
@@ -76,7 +68,7 @@
               :get-value="colab['.key']"
               :id="$refs.d_1.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_1.W].hora }}</span>
+            <span v-else style="max-width: 120px">{{ colab.domingos[$refs.d_1.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
             <folga
@@ -94,7 +86,7 @@
               :get-value="colab['.key']"
               :id="$refs.d_2.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_2.W].hora }}</span>
+            <span v-else style="max-width: 120px">{{ colab.domingos[$refs.d_2.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
             <folga
@@ -112,7 +104,7 @@
               :get-value="colab['.key']"
               :id="$refs.d_3.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_3.W].hora }}</span>
+            <span v-else style="max-width: 120px">{{ colab.domingos[$refs.d_3.W].hora }}</span>
           </td>
           <td class="dia has-text-centered">
             <folga
@@ -130,7 +122,7 @@
               :get-value="colab['.key']"
               :id="$refs.d_4.W"
             ></horario>
-            <span v-else>{{ colab.domingos[$refs.d_4.W].hora }}</span>
+            <span v-else style="max-width: 120px">{{ colab.domingos[$refs.d_4.W].hora }}</span>
           </td>
           <td v-if="condFivDom" class="dia has-text-centered">
             <folga
@@ -147,8 +139,8 @@
     <div class="columns">
       <div class="column">
         <table class="table is-bordered">
-          <tr>
-            <td>luiz eduardo de souza lopes</td>
+          <tr v-for="nom in banco" :key="banco.indexOf(nom)">
+            <td>{{nom.nome}}</td>
             <td style="min-width: 300px"></td>
           </tr>
         </table>
@@ -173,11 +165,6 @@ export default {
   data() {
     return {
       banco: [],
-      setDom_0: false,
-      setDom_1: false,
-      setDom_2: false,
-      setDom_3: false,
-      setDom_4: false,
       edit: true,
     };
   },
@@ -246,5 +233,8 @@ export default {
 .mat-ret {
   padding-left: 4px !important;
   padding-right: 4px !important;
+}
+a {
+  color: black
 }
 </style>

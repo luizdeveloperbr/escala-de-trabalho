@@ -11,7 +11,7 @@
                 v-for="s in setores"
                 :to="{ name: 'Mensal', params: { setor: s } }"
                 :key="setores.indexOf(s)"
-            >
+              >
                 {{s}}
               </router-link>
             </div>
@@ -23,7 +23,8 @@
         <router-link
         :to="{name: 'Mensal', query: {mes: mes}}"
         v-for="mes in meses" tag="option"
-        :key="meses.indexOf(mes)">{{mes}}
+        :key="meses.indexOf(mes)"
+        >{{mes}}
         </router-link>
         </select>
         </div>
@@ -34,7 +35,7 @@
               <a class="button is-primary">
                 Horarios
               </a>
-              <a class="button is-light"> Orgânico </a>
+              <router-link class="button" :to="{name:'Organico', query: {setor: $route.query.setor}}">Orgânico</router-link>
             </div>
           </div>
         </div>

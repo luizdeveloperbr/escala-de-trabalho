@@ -1,15 +1,22 @@
 <!--folga.vue-->
 <template>
+<div>
 <fieldset :disabled="allow">
   <div>
      <input
       type="date"
       v-model="nome"
+      :min="anterior.dia"
+      :max="max"
       class="input is-size-7"
       @change="updateDia"
     />
   </div>
   </fieldset>
+  <div class="control">
+<button class="button is-small" @click="rem">[X]</button>
+    </div>
+  </div>
 </template>
 <script>
 import moment from 'moment'
@@ -18,35 +25,53 @@ const banco = db.ref('setores')
 
 export default {
   name: "folga",
-  props: ["value", "getValue", "getReal"],
+  props: ["getValue", "getReal"],
   //usar as funçães de mine max com v-bind no input
   data(){
    return {
      nome: this.getReal,
-     allow: false,
+     anterior: null,
+     penultimo: null,
      min:'',
-     max:''
      }
   },
   created() {
-    if (this.getValue !== 0){
-      this.min = moment(this.getValue,'YYYY-MM-DD').subtract(1,'days').format('YYYY-MM-DD')
-      this.max = moment(this.getValue,'YYYY-MM-DD').add(3,'days').format('YYYY-MM-DD')
+    var _anterior =
+      `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
+      Number(this.$attrs.id - 1);
+    var _penultimo =
+      `${this.$route.params.setor}/organico/${this.getValue}/domingos/` +
+      Number(this.$attrs.id - 2);
+    this.$rtdbBind("anterior", banco.child(_anterior));
+    this.$rtdbBind("penultimo", banco.child(_penultimo));
+
+    return [this.penultimo.hora, this.anterior.hora];
+  
+  },
+computed:{
+  allow(){
+      var ant = this.anterior.dia
+      if (ant == false){
+        return false
+      }else{
+      return Boolean(this.penultimo.dia) === Boolean(ant)
       }
   },
-    updated(){
-    if (this.getValue !== 0){
-      this.min = moment(this.getValue,'YYYY-MM-DD').subtract(1,'days').format('YYYY-MM-DD')
-      this.max = moment(this.getValue,'YYYY-MM-DD').add(3,'days').format('YYYY-MM-DD')
-      console.log("updated")
-    }
-  },
+  max(){
+    return moment(this.anterior.dia, 'YYYY-MM-DD').add(9, 'days').format('YYYY-MM-DD')
+  }
+},
   methods:{
     updateDia() {
       var obj = {dia: this.nome}
-      var url = this.$route.params.setor + '/organico/' + this.getValue + "/domingos/" + this.$attrs.id;
-      console.log(url + '-' + obj.dia)
+      var url = `${this.$route.params.setor}/organico/${this.getValue}/domingos/${this.$attrs.id}`;
       return banco.child(url).update(obj)
+    },
+    rem(){
+      this.nome = "";
+      var obj = { dia: this.nome };
+      var url = `${this.$route.params.setor}/organico/${this.getValue}/domingos/${this.$attrs.id}`;
+      return banco.child(url).update(obj);
     },
   },
 };
