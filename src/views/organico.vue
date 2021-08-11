@@ -57,7 +57,6 @@
 
 <script>
 import { db } from "../db.js";
-import moment from 'moment'
 const setor = db.ref("setores");
 export default {
   name: "organico",
@@ -83,14 +82,14 @@ export default {
         var weeks = []
               var i = weeks.length
             while (i < 54){
-                  weeks.push({ dia: moment({y:2021, m:0, d:1}).add(i++,"weeks").format('YYYY-MM-DD'), hora: "07:30 AS 11:00|11:15 AS 13:45" })
+                  weeks.push({ id: i++, dia: "", hora: "" })
               }
               return weeks
     }
   },
   methods: {
           addColab() {
-      return db
+        return db
         .ref('setores/' + this.$route.params.setor + '/organico')
         .push({
           mat: this.mat,

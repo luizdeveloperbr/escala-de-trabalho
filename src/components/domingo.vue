@@ -15,11 +15,11 @@ moment.locale('pt-br')
 		},
         initDate(){
         var day
-           if (moment(this.$route.query.mes, 'MMMM').startOf('week').month() !== moment(this.$route.query.mes, 'MMMM').month())
+           if (moment(this.$parent.monthpick, 'MMMM').startOf('week').month() !== moment(this.$parent.monthpick, 'MMMM').month())
                 {
-            day = moment(this.$route.query.mes, 'MMMM').startOf('week').add(1, 'w').toDate()
+            day = moment(this.$parent.monthpick, 'MMMM').startOf('week').add(1, 'w').toDate()
                 } else {
-            day = moment(this.$route.query.mes, 'MMMM').startOf('week').toDate()
+            day = moment(this.$parent.monthpick, 'MMMM').startOf('week').toDate()
                 }
            return day
         },
