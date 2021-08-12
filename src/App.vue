@@ -3,21 +3,16 @@
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-menu">
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> {{setor}} </a>
-            <div class="navbar-dropdown">
-              <a
-                class="navbar-item"
-                v-for="s in setores"
-                @click="setor = s"
-                :key="setores.indexOf(s)"
-              >
-                {{ s }}
-              </a>
+          <div class="navbar-item">
+              <div class="select">
+              <select v-model="setor">
+                <option v-for="set in setores">{{set}}</option>
+              </select>
             </div>
           </div>
         </div>
         <div class="navbar-item">
+          <router-link class="has-text-white" to="/">Inicio</router-link>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -46,8 +41,8 @@ export default {
   name: "App",
   data() {
     return {
-      setores: ["mercearia", "cpd", "salgados"],
-      setor: "Selecione...",
+      setores: ["mercearia", "cpd", "salgados", "frente_de_loja"],
+      setor: "",
     };
   },
 };

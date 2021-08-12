@@ -9,12 +9,12 @@
       :min="anterior.dia"
       :max="max"
       class="input is-size-7"
-      @change="updateDia"
+      @change="updateDia(false)"
     />
   </div>
   </fieldset>
   <div class="control">
-<button class="button is-small" @click="rem">[X]</button>
+<button class="button is-small" @click="updateDia(true)">[X]</button>
     </div>
   </div>
 </template>
@@ -26,7 +26,6 @@ const banco = db.ref('setores')
 export default {
   name: "folga",
   props: ["getValue", "getReal"],
-  //usar as funçães de mine max com v-bind no input
   data(){
    return {
      nome: this.getReal,
@@ -58,20 +57,17 @@ computed:{
       }
   },
   max(){
-    return moment(this.anterior.dia, 'YYYY-MM-DD').add(9, 'days').format('YYYY-MM-DD')
+    return moment(this.anterior.dia, 'YYYY-MM-DD').add(8, 'days').format('YYYY-MM-DD')
   }
 },
   methods:{
-    updateDia() {
+    updateDia(e) {
+      if(e){
+      this.nome = "";
+      }
       var obj = {dia: this.nome}
       var url = `${this.$route.params.setor}/organico/${this.getValue}/domingos/${this.$attrs.id}`;
       return banco.child(url).update(obj)
-    },
-    rem(){
-      this.nome = "";
-      var obj = { dia: this.nome };
-      var url = `${this.$route.params.setor}/organico/${this.getValue}/domingos/${this.$attrs.id}`;
-      return banco.child(url).update(obj);
     },
   },
 };

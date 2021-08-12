@@ -11,19 +11,17 @@
             />
           </router-link>
         </div>
-        <div class="level-item">
-      <h2>Escala Mensal Setor: {{$route.params.setor}} | Mês: {{monthpick}}</h2>
-        </div>
-        <br/>
-        <div class="level-item">
-        <div class="select is-small block">
-          <select v-model="monthpick">
-            <option v-for="mes in meses" :value="mes">
-              {{ mes }}
-            </option>
-          </select>
-        </div>
-        </div>
+        <table class="has-text-centred">
+          <tr>
+            <td><input v-model="monthpick" type="month" /></td>
+          </tr>
+          <tr>
+            <td>Escala Mensal Setor: {{ $route.params.setor }}</td>
+          </tr>
+          <tr>
+            <td>Referente a {{ monthpick | moment("MMMM") }}</td>
+          </tr>
+        </table>
         <div class="level-right">
           <p class="content is-small">
             LIDER COMERCIO E IND. LTDA <br />ROD BR-316 KM 02 - GUANABARA -
@@ -38,7 +36,7 @@
           <div class="table-container">
             <table class="table is-bordered">
               <tr id="head-list" class="has-text-centered">
-                <td class="print_cls"></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>Domingo</td>
@@ -76,7 +74,7 @@
                     colab.nome
                   }}</a>
                 </td>
-                <td></td>
+                <td>{{ colab.hora }}</td>
                 <td class="has-text-centered hora">
                   <horario
                     v-if="colab.edit"
@@ -195,6 +193,7 @@
               <table class="table is-bordered">
                 <tr v-for="nom in banco" :key="banco.indexOf(nom)">
                   <td>{{ nom.nome }}</td>
+                  <td>{{ nom.funcao }}</td>
                   <td style="min-width: 300px"></td>
                 </tr>
               </table>
@@ -222,7 +221,6 @@ export default {
   data() {
     return {
       banco: [],
-      meses: moment.months(),
       monthpick: "",
       edit: true,
     };
@@ -243,8 +241,8 @@ export default {
     },
     condFivDom() {
       return (
-        moment(this.monthpick, "MMMM").startOf("week").month() ===
-        moment(this.monthpick, "MMMM").add(4, "w").month()
+        moment(this.monthpick, "YYYY-MM").startOf("week").month() ===
+        moment(this.monthpick, "YYYY-MM").add(4, "w").month()
       );
     },
   },
