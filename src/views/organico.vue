@@ -13,7 +13,7 @@
               <div class="field">
                 <div class="control">
                   <input
-                    type="text"
+                    type="number"
                     class="input"
                     placeholder="Matricula"
                     v-model="mat"
@@ -30,17 +30,22 @@
                   />
                 </div>
               </div>
-              <div class="field">
+              <div class="field has-addons">
                 <div class="control">
-                  <input
-                    type="text"
-                    class="input"
-                    placeholder="Função"
-                    v-model="funcao"
-                  />
+                  <a class="button is-static">Função</a>
+                </div>
+                <div class="control">
+                  <div class="select">
+                    <select class="select" v-model="funcao">
+                      <option v-for="f in fun" :value="f">{{ f.cargo }}</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-              <div class="field" style="width: 250px">
+              <div class="field has-addons" style="width: 250px">
+                <div class="control">
+                  <a class="button is-static">Horario Semanal</a>
+                </div>
                 <div class="control">
                   <div class="select">
                     <select v-model="hora">
@@ -64,18 +69,26 @@
         </div>
       </div>
       <div class="column">
-        <li v-for="c in banco">
-          <ul>
-            {{
-              c.mat
-            }}
-            ||
-            {{
-              c.nome
-            }}
-            <button class="button" @click="rem(c['.key'])">[X]</button>
-          </ul>
-        </li>
+        <div class="box">
+        <table class="table is-fullwidth">
+          <thead>
+            <th>Matricula</th>
+            <th>Nome</th>
+            <th>Função</th>
+            <th>Status</th>
+            <th>Excluir</th>
+          </thead>
+          <tbody>
+          <tr v-for="c in banco">
+            <td>{{c.mat}}</td>
+            <td>{{c.nome}}</td>
+            <td>{{c.funcao.cargo}}</td>
+            <td>{{c.status}}</td>
+            <td><button class="delete is-large" @click="rem(c['.key'])"></button></td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
       </div>
     </div>
   </div>
@@ -94,7 +107,9 @@ export default {
       mat: "",
       nome: "",
       funcao: "",
+      fun: [],
       hora: "",
+      status: "servico",
       setor: null,
       //id: this.$route.query.setor
     };
@@ -102,12 +117,22 @@ export default {
   firebase: {
     horario: db.ref("horarios/semana"),
   },
+  methods:{
+        editColab(idcol, coladKey) {
+      if (idcol === true) {
+        this.$firebaseRefs.banco.child(coladKey).update({ edit: false });
+      } else {
+        this.$firebaseRefs.banco.child(coladKey).update({ edit: true });
+      }
+      return "Changed";
+    },
+  },
   computed: {
     id() {
       return this.$route.params.setor + "/organico";
-      /* if (this.setor == null) {
-        return (this.modalActive = true);
-      }*/
+    },
+    func() {
+      return this.$route.params.setor + "/funcoes";
     },
     week: function () {
       var weeks = [];
@@ -120,23 +145,26 @@ export default {
   },
   methods: {
     addColab() {
-      return db.ref("setores/" + this.$route.params.setor + "/organico").push({
-        mat: this.mat,
-        nome: this.nome,
-        funcao: this.funcao,
-        hora: this.hora,
-        edit: false,
-        domingos: this.week,
-      })
-      .then(this.clearAdd());
+      return db
+        .ref("setores/" + this.$route.params.setor + "/organico")
+        .push({
+          mat: this.mat,
+          nome: this.nome,
+          funcao: this.funcao,
+          hora: this.hora,
+          edit: false,
+          status: this.status,
+          domingos: this.week,
+        })
+        .then(this.clearAdd());
     },
-    clearAdd(){
-        this.mat = null
-        this.nome = null
-        this.funcao = null
-        this.hora = null
+    clearAdd() {
+      this.mat = null;
+      this.nome = null;
+      this.funcao = null;
+      this.hora = null;
 
-      return console.log('limpo')
+      return console.log("limpo");
     },
     rem(e) {
       return db
@@ -150,6 +178,12 @@ export default {
       immediate: true,
       handler(id) {
         this.$rtdbBind("banco", setor.child(id));
+      },
+    },
+    func: {
+      immediate: true,
+      handler(func) {
+        this.$rtdbBind("fun", setor.child(func));
       },
     },
   },

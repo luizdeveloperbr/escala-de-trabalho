@@ -6,7 +6,7 @@
      <input
       type="date"
       v-model="nome"
-      :min="anterior.dia"
+      :min="min"
       :max="max"
       class="input is-size-7"
       @change="updateDia(false)"
@@ -31,7 +31,6 @@ export default {
      nome: this.getReal,
      anterior: null,
      penultimo: null,
-     min:'',
      }
   },
   created() {
@@ -57,7 +56,10 @@ computed:{
       }
   },
   max(){
-    return moment(this.anterior.dia, 'YYYY-MM-DD').add(8, 'days').format('YYYY-MM-DD')
+    return moment(this.anterior.dia, 'YYYY-MM-DD').add(9, 'days').format('YYYY-MM-DD')
+  },
+  min(){
+    return moment(this.anterior.dia, 'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD')
   }
 },
   methods:{

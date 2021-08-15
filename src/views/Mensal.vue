@@ -197,7 +197,7 @@
               <table class="table is-bordered">
                 <tr v-for="nom in banco" :key="banco.indexOf(nom)">
                   <td>{{ nom.nome }}</td>
-                  <td>{{ nom.funcao }}</td>
+                  <td>{{ nom.funcao.cargo }}</td>
                   <td style="min-width: 300px"></td>
                 </tr>
               </table>

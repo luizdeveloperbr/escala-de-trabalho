@@ -4,6 +4,9 @@
       <div class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item">
+          Selecione Setor:  
+          </div>
+          <div class="navbar-item">
             <div class="select">
               <select v-model="setor">
                 <option v-for="set in setores">{{ set }}</option>
@@ -50,7 +53,7 @@ export default {
   name: "App",
   data() {
     return {
-      setores: ["mercearia", "cpd", "salgados", "frente_de_loja"],
+      setores: ["mercearia", "cpd", "salgado", "frente_de_loja"],
       setor: "Setor",
     };
   },
