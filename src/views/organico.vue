@@ -58,7 +58,7 @@
               <button class="button is-success" @click="addColab()">
                 Salvar
               </button>
-              <button class="button is-danger">Limpar</button>
+              <button class="button is-danger" @click="clearAdd">Limpar</button>
             </div>
           </footer>
         </div>
@@ -100,7 +100,7 @@ export default {
     };
   },
   firebase: {
-    horario: db.ref("horarios/master"),
+    horario: db.ref("horarios/semana"),
   },
   computed: {
     id() {
@@ -127,8 +127,16 @@ export default {
         hora: this.hora,
         edit: false,
         domingos: this.week,
-      });
-      //.then(this.clearAdd());
+      })
+      .then(this.clearAdd());
+    },
+    clearAdd(){
+        this.mat = null
+        this.nome = null
+        this.funcao = null
+        this.hora = null
+
+      return console.log('limpo')
     },
     rem(e) {
       return db

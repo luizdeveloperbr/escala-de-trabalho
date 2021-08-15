@@ -21,7 +21,7 @@ export default new Router({
       component: Interjornada,
     },*/
     {
-      path: '/:setor/organico',
+      path: '/organico/:setor',
       name: 'Organico',
       component: Organico,
     },

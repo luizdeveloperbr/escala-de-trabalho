@@ -4,9 +4,9 @@
       <div class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item">
-              <div class="select">
+            <div class="select">
               <select v-model="setor">
-                <option v-for="set in setores">{{set}}</option>
+                <option v-for="set in setores">{{ set }}</option>
               </select>
             </div>
           </div>
@@ -17,14 +17,23 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <router-link :to="{name: 'Mensal', params: {setor: setor }}" class="button"> Mensal </router-link>
+              <router-link
+                class="button"
+                :to="{ 
+                  name: 'Mensal',
+                  params: { setor },
+                }"
+              >
+                Mensal
+              </router-link>
               <router-link
                 class="button"
                 :to="{
                   name: 'Organico',
-                  params: { setor: $route.params.setor },
+                  params: { setor },
                 }"
-                >Orgânico</router-link
+                >Orgânico
+                </router-link
               >
             </div>
           </div>
@@ -35,15 +44,26 @@
   </div>
 </template>
 <script>
-import "../node_modules/bulma/css/bulma.css";
+import "../node_modules/bulma/css/bulma.css"
 
 export default {
   name: "App",
   data() {
     return {
       setores: ["mercearia", "cpd", "salgados", "frente_de_loja"],
-      setor: "",
+      setor: "Setor",
     };
   },
 };
 </script>
+<style>
+primary: hsl(1.5, 100%, 47.8%);
+
+@media print {
+  nav
+  {display: none};
+    
+  .select 
+    {display: none};
+}
+</style>
