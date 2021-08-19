@@ -53,7 +53,7 @@ export default {
   name: "App",
   data() {
     return {
-      setores: ["mercearia", "cpd", "salgado", "frente_de_loja"],
+      setores: ["mercearia", "cpd", "salgado", "frente_de_loja","limpeza"],
       setor: "Setor",
     };
   },

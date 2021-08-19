@@ -83,7 +83,7 @@
             <td>{{c.mat}}</td>
             <td>{{c.nome}}</td>
             <td>{{c.funcao.cargo}}</td>
-            <td>{{c.status}}</td>
+            <td><status :get-real="c['.key']"></status></td>
             <td><button class="delete is-large" @click="rem(c['.key'])"></button></td>
           </tr>
           </tbody>
@@ -95,6 +95,7 @@
 </template>
 <script>
 import { db } from "../db.js";
+import status from "../components/status.vue"
 
 const setor = db.ref("setores");
 export default {
@@ -111,21 +112,10 @@ export default {
       hora: "",
       status: "servico",
       setor: null,
-      //id: this.$route.query.setor
     };
   },
   firebase: {
     horario: db.ref("horarios/semana"),
-  },
-  methods:{
-        editColab(idcol, coladKey) {
-      if (idcol === true) {
-        this.$firebaseRefs.banco.child(coladKey).update({ edit: false });
-      } else {
-        this.$firebaseRefs.banco.child(coladKey).update({ edit: true });
-      }
-      return "Changed";
-    },
   },
   computed: {
     id() {
@@ -187,5 +177,8 @@ export default {
       },
     },
   },
+  components:{
+    status
+  }
 };
 </script>
