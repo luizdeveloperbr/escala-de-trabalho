@@ -1,19 +1,19 @@
+const vue = require("@neutrinojs/vue");
+const jest = require("@neutrinojs/jest");
 
-const vue = require('@neutrinojs/vue');
-const jest = require('@neutrinojs/jest');
+module.exports = { 
+  options:{
+  root: __dirname,
+}
+};
 
 module.exports = {
-  options: {
-    root: __dirname,
-  },
-  use: [
-    vue({
-      hot:true,
-      html: {
-        title: 'escala',
-        
-      }
-    }),
-    jest(),
-  ],
-};
+ use:[
+  vue({
+    html: {
+      title: "escala",
+    }
+  }),
+  jest(),
+]
+}

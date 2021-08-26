@@ -104,13 +104,13 @@ export default {
     return {
       banco: [],
       horario: [],
-      modalActive: false,
+     // modalActive: false,
       mat: "",
       nome: "",
       funcao: "",
       fun: [],
       hora: "",
-      status: "servico",
+      status: 0,
       setor: null,
     };
   },

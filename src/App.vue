@@ -48,6 +48,7 @@
 </template>
 <script>
 import "../node_modules/bulma/css/bulma.css"
+import '@fortawesome/fontawesome-free/css/all.css'
 
 export default {
   name: "App",
@@ -60,13 +61,4 @@ export default {
 };
 </script>
 <style>
-primary: hsl(1.5, 100%, 47.8%);
-
-@media print {
-  nav
-  {display: none};
-    
-  .select 
-    {display: none};
-}
 </style>
