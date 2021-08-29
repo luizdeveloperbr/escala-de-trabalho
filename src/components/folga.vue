@@ -18,7 +18,7 @@
     </div>
   </div>
   <div v-else>
-    <span>{{display}}</span>
+    <span>{{ display }}</span>
   </div>
 </template>
 <script>
@@ -37,16 +37,15 @@ export default {
     };
   },
   created() {
-    const _static = `${this.$route.params.setor}/organico/${this.getValue}/domingos/`
-    const anterior = Number(this.getReal.id - 1)
-    const penultimo = Number(this.getReal.id - 2)
+    const _static = `${this.$route.params.setor}/organico/${this.getValue}/domingos/`;
+    const anterior = Number(this.getReal.id - 1);
+    const penultimo = Number(this.getReal.id - 2);
     this.$rtdbBind("anterior", banco.child(_static + anterior));
     this.$rtdbBind("penultimo", banco.child(_static + penultimo));
 
     return "OK";
   },
   computed: {
-    // ? :
     allow() {
       var ant = this.anterior.dia;
       if (ant == false) {
@@ -55,12 +54,12 @@ export default {
         return Boolean(this.penultimo.dia) === Boolean(ant);
       }
     },
-    display(){
-      if (this.getReal.dia){
-     return moment(this.getReal.dia, "YYYY-MM-DD").format("ddd, DD/MMM")
-     }else{
-       return " "
-     }
+    display() {
+      if (this.getReal.dia) {
+        return moment(this.getReal.dia, "YYYY-MM-DD").format("ddd, DD/MMM");
+      } else {
+        return " ";
+      }
     },
     max() {
       return moment(this.anterior.dia, "YYYY-MM-DD")
