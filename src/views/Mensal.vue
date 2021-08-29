@@ -24,13 +24,13 @@
             <td>Escala Mensal Setor: <p class="is-uppercase">{{ $route.params.setor }}</p></td>
           </tr>
           <tr>
-            <td><p class="is-uppercase">{{ monthpick | moment("MMMM") }} de 2021</p></td>
+            <td><p class="is-uppercase">{{ monthpick }} de 2021</p></td>
           </tr>
         </table>
         <div class="level-right">
           <p class="content is-small">
             LIDER COMERCIO E IND. LTDA <br />ROD BR-316 KM 02 - GUANABARA -
-            ANINDEUA <br />(91) 4008-1012 | CNPJ: 05.054.671/0014-73
+            ANANINDEUA <br />(91) 4008-1012 | CNPJ: 05.054.671/0014-73
           </p>
         </div>
       </div>
@@ -76,7 +76,8 @@
               </tr>
               <tr v-for="colab in banco" :class="{ 'is-selected': colab.edit }">
                 <td>
-                  <a style="color: black!important" class="button is-small" @click="editColab(colab.edit, colab['.key'])" v-if="colab.status <= 0"><i  class="fas fa-lg fa-edit"></i></a>
+                  <a style="color: black!important" class="button is-small" @click="editColab(colab.edit, colab['.key'])" v-if="colab.status <= 0">
+                   <span class="icon"><i  class="fas fa-lg fa-edit"></i></span></a>
                 </td>
                 <td>{{ colab.mat }}</td>
                 <td>
@@ -85,115 +86,75 @@
                   }}
                 </td>
                 <td>{{ colab.hora }}</td>
-                <td class="has-text-centered hora">
+                <td class="has-text-centered">
                   <horario
-                    v-if="colab.edit"
-                    :get-real="colab.domingos[$refs.d_0.W].hora"
+                    :show="colab.edit"
+                    :get-real="colab.domingos[$refs.d_0.W]"
                     :get-value="colab['.key']"
-                    :id="$refs.d_0.W"
                   ></horario>
-                  <span v-else style="max-width: 120px">{{
-                    colab.domingos[$refs.d_0.W].hora
-                  }}</span>
                 </td>
-                <td class="dia has-text-centered">
+                <td class="has-text-centered">
                   <folga
-                    v-if="colab.edit"
+                    :show="colab.edit"
                     :get-value="colab['.key']"
-                    :get-real="colab.domingos[$refs.d_0.W].dia"
-                    :id="$refs.d_0.W"
+                    :get-real="colab.domingos[$refs.d_0.W]"
                   ></folga>
-                  <span v-else>{{
-                    colab.domingos[$refs.d_0.W].dia | moment("ddd, DD/MMM")
-                  }}</span>
                 </td>
-                <td class="has-text-centered hora">
+                <td class="has-text-centered">
                   <horario
-                    v-if="colab.edit"
-                    :get-real="colab.domingos[$refs.d_1.W].hora"
+                    :show="colab.edit"
+                    :get-real="colab.domingos[$refs.d_1.W]"
                     :get-value="colab['.key']"
-                    :id="$refs.d_1.W"
                   ></horario>
-                  <span v-else style="max-width: 120px">{{
-                    colab.domingos[$refs.d_1.W].hora
-                  }}</span>
                 </td>
-                <td class="dia has-text-centered">
+                <td class="has-text-centered">
                   <folga
-                    v-if="colab.edit"
+                    :show="colab.edit"
                     :get-value="colab['.key']"
-                    :get-real="colab.domingos[$refs.d_1.W].dia"
-                    :id="$refs.d_1.W"
+                    :get-real="colab.domingos[$refs.d_1.W]"
                   ></folga>
-                  <span v-else>{{
-                    colab.domingos[$refs.d_1.W].dia | moment("ddd, DD/MMM")
-                  }}</span>
                 </td>
-                <td class="has-text-centered hora">
+                <td class="has-text-centered">
                   <horario
-                    v-if="colab.edit"
-                    :get-real="colab.domingos[$refs.d_2.W].hora"
+                    :show="colab.edit"
+                    :get-real="colab.domingos[$refs.d_2.W]"
                     :get-value="colab['.key']"
-                    :id="$refs.d_2.W"
                   ></horario>
-                  <span v-else style="max-width: 120px">{{
-                    colab.domingos[$refs.d_2.W].hora
-                  }}</span>
                 </td>
-                <td class="dia has-text-centered">
+                <td class="has-text-centered">
                   <folga
-                    v-if="colab.edit"
+                    :show="colab.edit"
                     :get-value="colab['.key']"
-                    :get-real="colab.domingos[$refs.d_2.W].dia"
-                    :id="$refs.d_2.W"
+                    :get-real="colab.domingos[$refs.d_2.W]"
                   ></folga>
-                  <span v-else>{{
-                    colab.domingos[$refs.d_2.W].dia | moment("ddd, DD/MMM")
-                  }}</span>
                 </td>
                 <td class="has-text-centered hora">
                   <horario
-                    v-if="colab.edit"
-                    :get-real="colab.domingos[$refs.d_3.W].hora"
+                    :show="colab.edit"
+                    :get-real="colab.domingos[$refs.d_3.W]"
                     :get-value="colab['.key']"
-                    :id="$refs.d_3.W"
                   ></horario>
-                  <span v-else style="max-width: 120px">{{
-                    colab.domingos[$refs.d_3.W].hora
-                  }}</span>
                 </td>
-                <td class="dia has-text-centered">
+                <td class="has-text-centered">
                   <folga
-                    v-if="colab.edit"
+                    :show="colab.edit"
                     :get-value="colab['.key']"
-                    :get-real="colab.domingos[$refs.d_3.W].dia"
-                    :id="$refs.d_3.W"
+                    :get-real="colab.domingos[$refs.d_3.W]"
                   ></folga>
-                  <span v-else>{{
-                    colab.domingos[$refs.d_3.W].dia | moment("ddd, DD/MMM")
-                  }}</span>
                 </td>
                 <td class="has-text-centered hora" v-if="condFivDom">
                   <horario
-                    v-if="colab.edit"
-                    :get-real="colab.domingos[$refs.d_4.W].hora"
+                    :show="colab.edit"
+                    :get-real="colab.domingos[$refs.d_4.W]"
                     :get-value="colab['.key']"
-                    :id="$refs.d_4.W"
                   ></horario>
-                  <span v-else style="max-width: 120px">{{
-                    colab.domingos[$refs.d_4.W].hora
-                  }}</span>
                 </td>
                 <td v-if="condFivDom" class="dia has-text-centered">
                   <folga
-                    v-if="colab.edit"
+                    :show="colab.edit"
                     :get-value="colab['.key']"
-                    :get-real="colab.domingos[$refs.d_4.W].dia"
-                    :id="$refs.d_4.W"
+                    :get-real="colab.domingos[$refs.d_4.W]"
                   ></folga>
-                  <span v-else>{{
-                    colab.domingos[$refs.d_4.W].dia | moment("ddd, DD/MMM")
-                  }}</span>
                 </td>
               </tr>
             </table>
@@ -238,11 +199,10 @@ export default {
   },
   methods: {
     editColab(idcol, coladKey) {
-      if (idcol === true) {
-        this.$firebaseRefs.banco.child(coladKey).update({ edit: false });
-      } else {
-        this.$firebaseRefs.banco.child(coladKey).update({ edit: true });
-      }
+      const reff = this.$firebaseRefs.banco.child(coladKey)
+
+          idcol == true ? reff.update({ edit: false }) : reff.update({ edit: true })
+
       return "Changed";
     },
   },
@@ -266,13 +226,13 @@ export default {
     id: {
       immediate: true,
       handler(id) {
-        this.$rtdbBind("banco", setores.child(id));
+        this.$rtdbBind("banco", setores.child(id).orderByChild('funcao/cargo'));
       },
     },
   },
 };
 </script>
-<style>
+<style scoped>
 
 .sign {
   border-top-width: 2px;
@@ -283,27 +243,5 @@ export default {
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
-}
-.hora {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
-.dia {
-  padding-left: 6px !important;
-  padding-right: 6px !important;
-  width: 70px;
-}
-.list > td {
-  padding: 5px !important;
-}
-#head-list > td {
-  text-align: center;
-}
-.mat-ret {
-  padding-left: 4px !important;
-  padding-right: 4px !important;
-}
-a {
-  color: black;
 }
 </style>

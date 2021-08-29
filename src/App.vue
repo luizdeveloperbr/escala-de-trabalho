@@ -8,8 +8,8 @@
           </div>
           <div class="navbar-item">
             <div class="select">
-              <select v-model="setor">
-                <option v-for="set in setores">{{ set }}</option>
+              <select v-model="setor" @change="$router.push('/')">
+                <option v-for="set in setores" >{{ set }}</option>
               </select>
             </div>
           </div>

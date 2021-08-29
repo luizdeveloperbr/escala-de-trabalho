@@ -2,13 +2,13 @@
   <div class="main">
     <div>
       <button class="button is-small" @click="editColab('menos')">
-        <i class="fas fa-lg fa-angle-left"></i>
+        <span class="icon"><i class="fas fa-lg fa-angle-left"></i></span>
       </button>
     </div>
-    <p>{{ list[colaboradores.status] }}</p>
+    <span class="tag is-info is-medium" :class="{'is-danger': Boolean(colaboradores.status)}">{{ list[colaboradores.status] }}</span>
     <div>
       <button class="button is-small" @click="editColab('mais')">
-        <i class="fas fa-lg fa-angle-right"></i>
+       <span class="icon"><i class="fas fa-lg fa-angle-right"></i></span>
       </button>
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
     return {
       colaboradores: {},
       list: ["disponivel", "ferias", "afastado", "licença"],
-      sel: null,
+      sel: 0,
     };
   },
   watch: {
@@ -39,11 +39,7 @@ export default {
   },
   methods: {
     editColab(a) {
-      if (a == "menos") {
-        this.sel--;
-      } else {
-        this.sel++;
-      }
+      a == 'menos' ? this.sel-- : this.sel++ 
       return this.$firebaseRefs.colaboradores.update({ status: this.sel });
     },
   },
@@ -52,8 +48,5 @@ export default {
 <style scoped>
 .main {
   display: flex;
-}
-.main > input {
-  max-width: 100px;
 }
 </style>
