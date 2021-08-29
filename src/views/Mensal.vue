@@ -193,7 +193,7 @@ export default {
     return {
       banco: [],
       months: moment.months(),
-      monthpick: moment().format('MMMM'),
+      monthpick: "",
       edit: true,
     };
   },

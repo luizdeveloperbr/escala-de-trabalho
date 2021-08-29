@@ -35,7 +35,7 @@ export default {
   firebase: {
     list: db.ref("horarios/master"),
   },
-  data() {
+  data: function() {
     return {
       list: [],
       atual: null,
