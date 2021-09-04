@@ -23,28 +23,38 @@
 </template>
 <script>
 import moment from "moment";
-import { db } from "../db";
+import {db} from "../db";
 const banco = db.ref("setores");
-
 export default {
   name: "folga",
   props: ["getValue", "getReal", "show"],
   data() {
     return {
       nome: this.getReal.dia,
-      anterior: null,
-      penultimo: null,
+      anterior:null,
+      penultimo:null,
+      atual: {},
     };
   },
   created() {
-    const _static = `${this.$route.params.setor}/organico/${this.getValue}/domingos/`;
-    const anterior = Number(this.getReal.id - 1);
-    const penultimo = Number(this.getReal.id - 2);
-    this.$rtdbBind("anterior", banco.child(_static + anterior));
-    this.$rtdbBind("penultimo", banco.child(_static + penultimo));
-
-    return "OK";
+    var url_ant = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 1)
+    var url_pen = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 2)
+     this.$rtdbBind("anterior", banco.child(url_ant))
+     this.$rtdbBind("penultimo", banco.child(url_pen))
+    return console.log('created');
   },
+   mounted() {
+    var url = `${this.$route.params.setor}/organico/${this.getValue}`;
+    this.$rtdbBind("atual", banco.child(url));
+    return console.log('mounted');
+  },
+  /*updated() {
+    var url_ant = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 1)
+    var url_pen = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 2)
+     this.$rtdbBind("anterior", banco.child(url_ant))
+     this.$rtdbBind("penultimo", banco.child(url_pen))
+    return console.log('update');
+  },*/
   computed: {
     allow() {
       var ant = this.anterior.dia;
@@ -61,7 +71,7 @@ export default {
         return " ";
       }
     },
-    max() {
+   max() {
       return moment(this.anterior.dia, "YYYY-MM-DD")
         .add(9, "days")
         .format("YYYY-MM-DD");

@@ -1,3 +1,4 @@
+
 import Vue from 'vue';
 import { rtdbPlugin } from 'vuefire';
 import App from './App.vue';

@@ -1,4 +1,4 @@
-<!-- timeEntrance -->
+<!-- horario.vue -->
 <template>
   <div>
     <div v-if="show">
@@ -22,12 +22,12 @@
       </div>
     </div>
     <div v-else>
-      {{ getReal.hora || lista[atual.status] }}
+      {{ getReal.hora }}
     </div>
   </div>
 </template>
 <script>
-import { db } from "../db";
+import {db} from "../db";
 const banco = db.ref("setores");
 export default {
   name: "horario",
@@ -38,26 +38,17 @@ export default {
   data: function() {
     return {
       list: [],
-      atual: null,
-      lista: [" ", "ferias", "afastado", "licença"],
-      anterior: null,
-      penultimo: null,
+      anterior:null,
+      penultimo:null,
       ipt: this.getReal.hora,
     };
   },
   created() {
-    const _static = `${this.$route.params.setor}/organico/${this.getValue}/domingos/`;
-    const anterior = Number(this.getReal.id - 1);
-    const penultimo = Number(this.getReal.id - 2);
-    this.$rtdbBind("anterior", banco.child(_static + anterior));
-    this.$rtdbBind("penultimo", banco.child(_static + penultimo));
-
-    return "OK";
-  },
-  mounted() {
-    var url = `${this.$route.params.setor}/organico/${this.getValue}`;
-    this.$rtdbBind("atual", banco.child(url));
-    return console.log(url);
+    var url_ant = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 1)
+    var url_pen = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 2)
+     this.$rtdbBind("anterior", banco.child(url_ant))
+     this.$rtdbBind("penultimo", banco.child(url_pen))
+    return console.log('created');
   },
   computed: {
     allow() {
@@ -67,7 +58,7 @@ export default {
       } else {
         return Boolean(this.penultimo.hora) == Boolean(ant);
       }
-    },
+    }
   },
   methods: {
     updateHora(e) {

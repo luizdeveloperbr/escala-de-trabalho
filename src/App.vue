@@ -8,7 +8,7 @@
           </div>
           <div class="navbar-item">
             <div class="select">
-              <select v-model="setor" @change="$router.push('/')">
+              <select v-model="setor">
                 <option v-for="set in setores" >{{ set }}</option>
               </select>
             </div>
@@ -19,7 +19,7 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
+            <div v-show="Boolean(setor)" class="buttons">
               <router-link
                 class="button"
                 :to="{ 
@@ -49,13 +49,12 @@
 <script>
 import "../node_modules/bulma/css/bulma.css"
 import '@fortawesome/fontawesome-free/css/all.css'
-
 export default {
   name: "App",
   data() {
     return {
       setores: ["mercearia", "cpd", "salgado", "frente_de_loja","limpeza"],
-      setor: "Setor",
+      setor: null,
     };
   },
 };

@@ -118,9 +118,8 @@
   </div>
 </template>
 <script>
-import { db } from "../db.js";
+import {db} from "../db.js";
 import status from "../components/status.vue";
-
 const setor = db.ref("setores");
 export default {
   name: "organico",
@@ -178,7 +177,6 @@ export default {
       this.nome = null;
       this.funcao = null;
       this.hora = null;
-
       return console.log("limpo");
     },
     rem(e) {

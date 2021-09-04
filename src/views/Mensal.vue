@@ -181,11 +181,10 @@
 </template>
 <script>
 import moment from "moment";
-import { db } from "../db";
+import {db} from "../db";
 import domingo from "../components/domingo.vue";
 import horario from "../components/horario.vue";
 import folga from "../components/folga.vue";
-
 const setores = db.ref("setores");
 export default {
   name: "Mensal",
@@ -193,16 +192,14 @@ export default {
     return {
       banco: [],
       months: moment.months(),
-      monthpick: "",
+      monthpick: moment().format('MMMM'),
       edit: true,
     };
   },
   methods: {
     editColab(idcol, coladKey) {
       const reff = this.$firebaseRefs.banco.child(coladKey)
-
           idcol == true ? reff.update({ edit: false }) : reff.update({ edit: true })
-
       return "Changed";
     },
   },
@@ -233,7 +230,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .sign {
   border-top-width: 2px;
   border-top-color: black;
