@@ -1,7 +1,6 @@
 <!-- horario.vue -->
 <template>
   <div>
-    <div v-if="show">
       <fieldset :disabled="allow">
         <div class="field has-addons">
           <div class="select is-small">
@@ -20,10 +19,6 @@
       <div class="control">
         <button class="button is-small" @click="updateHora(true)">[X]</button>
       </div>
-    </div>
-    <div v-else>
-      {{ getReal.hora }}
-    </div>
   </div>
 </template>
 <script>
@@ -31,24 +26,25 @@ import {db} from "../db";
 const banco = db.ref("setores");
 export default {
   name: "horario",
-  props: ["getValue", "getReal", "show"],
+  props: ["getValue", "getReal"],// "show", "status"],
   firebase: {
     list: db.ref("horarios/master"),
   },
   data: function() {
     return {
       list: [],
-      anterior:null,
-      penultimo:null,
+      //s: [" ","FERIAS","AFASTADO","LICENÇA"],
+      anterior:{},
+      penultimo:{},
       ipt: this.getReal.hora,
     };
   },
-  created() {
+  mounted(){
     var url_ant = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 1)
     var url_pen = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 2)
      this.$rtdbBind("anterior", banco.child(url_ant))
      this.$rtdbBind("penultimo", banco.child(url_pen))
-    return console.log('created');
+    return console.log('updated');
   },
   computed: {
     allow() {
@@ -72,7 +68,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .select > select {
   padding-right: 6.5px !important;
 }

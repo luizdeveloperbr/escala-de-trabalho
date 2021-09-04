@@ -88,73 +88,88 @@
                 <td>{{ colab.hora }}</td>
                 <td class="has-text-centered">
                   <horario
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-real="colab.domingos[$refs.d_0.W]"
                     :get-value="colab['.key']"
+                    :status="colab.status"
                   ></horario>
+                  <span v-else>{{colab.domingos[$refs.d_0.W].hora}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-value="colab['.key']"
                     :get-real="colab.domingos[$refs.d_0.W]"
                   ></folga>
+                  <span v-else>{{colab.domingos[$refs.d_0.W].dia | moment("ddd, DD/MMM")}}</span>
                 </td>
                 <td class="has-text-centered">
                   <horario
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-real="colab.domingos[$refs.d_1.W]"
                     :get-value="colab['.key']"
+                    :status="colab.status"
                   ></horario>
+                  <span v-else>{{colab.domingos[$refs.d_1.W].hora}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-value="colab['.key']"
                     :get-real="colab.domingos[$refs.d_1.W]"
                   ></folga>
+                  <span v-else>{{colab.domingos[$refs.d_1.W].dia | moment("ddd, DD/MMM")}}</span>
                 </td>
                 <td class="has-text-centered">
                   <horario
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-real="colab.domingos[$refs.d_2.W]"
                     :get-value="colab['.key']"
+                    :status="colab.status"
                   ></horario>
+                  <span v-else>{{colab.domingos[$refs.d_2.W].hora}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-value="colab['.key']"
                     :get-real="colab.domingos[$refs.d_2.W]"
                   ></folga>
+                  <span v-else>{{colab.domingos[$refs.d_2.W].dia | moment("ddd, DD/MMM")}}</span>
                 </td>
                 <td class="has-text-centered hora">
                   <horario
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-real="colab.domingos[$refs.d_3.W]"
                     :get-value="colab['.key']"
+                    :status="colab.status"
                   ></horario>
+                  <span v-else>{{colab.domingos[$refs.d_3.W].hora}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-value="colab['.key']"
                     :get-real="colab.domingos[$refs.d_3.W]"
                   ></folga>
+                  <span v-else>{{colab.domingos[$refs.d_3.W].dia | moment("ddd, DD/MMM")}}</span>
                 </td>
                 <td class="has-text-centered hora" v-if="condFivDom">
                   <horario
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-real="colab.domingos[$refs.d_4.W]"
                     :get-value="colab['.key']"
+                    :status="colab.status"
                   ></horario>
+                  <span v-else>{{colab.domingos[$refs.d_0.W].hora}}</span>
                 </td>
                 <td v-if="condFivDom" class="dia has-text-centered">
                   <folga
-                    :show="colab.edit"
+                    v-if="colab.edit"
                     :get-value="colab['.key']"
                     :get-real="colab.domingos[$refs.d_4.W]"
                   ></folga>
+                  <span v-else>{{colab.domingos[$refs.d_4.W].dia | moment("ddd, DD/MMM")}}</span>
                 </td>
               </tr>
             </table>
@@ -192,7 +207,7 @@ export default {
     return {
       banco: [],
       months: moment.months(),
-      monthpick: moment().format('MMMM'),
+      monthpick: moment().add(1,'month').format('MMMM'),
       edit: true,
     };
   },

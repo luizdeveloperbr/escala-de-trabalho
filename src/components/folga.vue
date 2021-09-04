@@ -1,6 +1,6 @@
 <!--folga.vue-->
 <template>
-  <div v-if="show">
+  <div>
     <fieldset :disabled="allow">
       <div>
         <input
@@ -17,9 +17,6 @@
       <button class="button is-small" @click="updateDia(true)">[X]</button>
     </div>
   </div>
-  <div v-else>
-    <span>{{ display }}</span>
-  </div>
 </template>
 <script>
 import moment from "moment";
@@ -27,13 +24,12 @@ import {db} from "../db";
 const banco = db.ref("setores");
 export default {
   name: "folga",
-  props: ["getValue", "getReal", "show"],
+  props: ["getValue", "getReal"],
   data() {
     return {
       nome: this.getReal.dia,
       anterior:null,
       penultimo:null,
-      atual: {},
     };
   },
   created() {
@@ -43,18 +39,6 @@ export default {
      this.$rtdbBind("penultimo", banco.child(url_pen))
     return console.log('created');
   },
-   mounted() {
-    var url = `${this.$route.params.setor}/organico/${this.getValue}`;
-    this.$rtdbBind("atual", banco.child(url));
-    return console.log('mounted');
-  },
-  /*updated() {
-    var url_ant = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 1)
-    var url_pen = `${this.$route.params.setor}/organico/${this.getValue}/domingos/` + Number(this.getReal.id - 2)
-     this.$rtdbBind("anterior", banco.child(url_ant))
-     this.$rtdbBind("penultimo", banco.child(url_pen))
-    return console.log('update');
-  },*/
   computed: {
     allow() {
       var ant = this.anterior.dia;
