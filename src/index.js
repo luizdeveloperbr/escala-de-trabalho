@@ -4,10 +4,11 @@ import { rtdbPlugin } from 'vuefire';
 import App from './App.vue';
 import router from './router';
 
-const moment = require('moment')
-require('moment/locale/pt-br')
+import moment from 'moment'
+import 'moment/locale/pt-br'
+import VueMoment from 'vue-moment';
  
-Vue.use(require('vue-moment'), {
+Vue.use(VueMoment, {
     moment
 })
 

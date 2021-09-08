@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark prnt" role="navigation" aria-label="main navigation">
       <div class="navbar-menu">
         <div class="navbar-start">
           <div class="navbar-item">
@@ -60,4 +60,9 @@ export default {
 };
 </script>
 <style>
+@media print {
+  .prnt {
+    display: none
+  }
+}
 </style>

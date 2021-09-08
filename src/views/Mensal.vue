@@ -12,11 +12,13 @@
         <table class="has-text-centered">
           <tr>
             <td>
+              <div class="border prnt">
               <label for="month">Selecione o Mês</label>
               <div class="select is-small">
                 <select id="month" v-model="monthpick">
                   <option class="is-capitalized" v-for="mes in months" :value="mes" :key="months.indexOf(mes)">{{mes}}</option> 
                 </select>
+              </div>
               </div>
             </td>
           </tr>
@@ -41,7 +43,7 @@
           <div class="table-container">
             <table class="table is-bordered">
               <tr id="head-list" class="has-text-centered">
-                <td></td>
+                <td class="prnt"></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -57,7 +59,7 @@
                 <td v-if="condFivDom"></td>
               </tr>
               <tr id="head-list" class="has-text-centered">
-                <td></td>
+                <td class="prnt"></td>
                 <td class="mat-ret">Matricula</td>
                 <td>Colaborador</td>
                 <td class="mat-ret">Retorno</td>
@@ -75,7 +77,7 @@
                 <td v-if="condFivDom">folga</td>
               </tr>
               <tr v-for="colab in banco" :class="{ 'is-selected': colab.edit }">
-                <td>
+                <td class="prnt">
                   <a style="color: black!important" class="button is-small" @click="editColab(colab.edit, colab['.key'])" v-if="colab.status <= 0">
                    <span class="icon"><i  class="fas fa-lg fa-edit"></i></span></a>
                 </td>
@@ -161,7 +163,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_0.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_4.W].hora}}</span>
                 </td>
                 <td v-if="condFivDom" class="dia has-text-centered">
                   <folga
@@ -216,6 +218,7 @@ export default {
       const reff = this.$firebaseRefs.banco.child(coladKey)
           idcol == true ? reff.update({ edit: false }) : reff.update({ edit: true })
       return "Changed";
+      //return this.$firebaseRefs.banco.child(coladKey).update({edit: !idcol})
     },
   },
   computed: {
@@ -254,5 +257,11 @@ export default {
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.border{
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 4px
 }
 </style>

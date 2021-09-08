@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Mensal from './views/Mensal.vue';
 import Organico from './views/organico.vue'
+import Main from './views/main.vue'
 //import Interjornada from './views/Interjornada.vue'
 
 Vue.use(Router);
@@ -14,6 +15,11 @@ export default new Router({
       path: '/mensal/:setor',
       name: 'Mensal',
       component: Mensal,
+    },
+    {
+      path: '/',
+      name: 'Main',
+      component: Main,
     },
     /*{
       path: '/interjornada',
