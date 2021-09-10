@@ -134,7 +134,6 @@ export default {
       funcao: "",
       fun: [],
       hora: "",
-      status: 0,
       setor: null,
     };
   },
@@ -159,7 +158,7 @@ export default {
   },
   methods: {
     addColab() {
-      return db
+         return db
         .ref("setores/" + this.$route.params.setor + "/organico")
         .push({
           mat: this.mat,
@@ -167,7 +166,7 @@ export default {
           funcao: this.funcao,
           hora: this.hora,
           edit: false,
-          status: this.status,
+          status: 0,
           domingos: this.week,
         })
         .then(this.clearAdd());
@@ -180,7 +179,6 @@ export default {
       return console.log("limpo");
     },
     rem(e) {
-      this.modal = true
  return db
         .ref(`setores/${this.$route.params.setor}/organico`)
         .child(e)

@@ -95,7 +95,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_0.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_0.W].hora || s[colab.status]}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
@@ -112,7 +112,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_1.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_1.W].hora || s[colab.status]}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
@@ -129,7 +129,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_2.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_2.W].hora || s[colab.status]}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
@@ -146,7 +146,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_3.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_3.W].hora || s[colab.status]}}</span>
                 </td>
                 <td class="has-text-centered">
                   <folga
@@ -163,7 +163,7 @@
                     :get-value="colab['.key']"
                     :status="colab.status"
                   ></horario>
-                  <span v-else>{{colab.domingos[$refs.d_4.W].hora}}</span>
+                  <span v-else>{{colab.domingos[$refs.d_4.W].hora || s[colab.status]}}</span>
                 </td>
                 <td v-if="condFivDom" class="dia has-text-centered">
                   <folga
@@ -208,6 +208,7 @@ export default {
   data() {
     return {
       banco: [],
+      s: [" ","FERIAS","AFASTADO","LICENÇA"],
       months: moment.months(),
       monthpick: moment().add(1,'month').format('MMMM'),
       edit: true,
@@ -215,10 +216,7 @@ export default {
   },
   methods: {
     editColab(idcol, coladKey) {
-      const reff = this.$firebaseRefs.banco.child(coladKey)
-          idcol == true ? reff.update({ edit: false }) : reff.update({ edit: true })
-      return "Changed";
-      //return this.$firebaseRefs.banco.child(coladKey).update({edit: !idcol})
+      return this.$firebaseRefs.banco.child(coladKey).update({edit: !idcol})
     },
   },
   computed: {

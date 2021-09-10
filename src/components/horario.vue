@@ -26,14 +26,13 @@ import {db} from "../db";
 const banco = db.ref("setores");
 export default {
   name: "horario",
-  props: ["getValue", "getReal"],// "show", "status"],
+  props: ["getValue", "getReal"],
   firebase: {
     list: db.ref("horarios/master"),
   },
   data: function() {
     return {
       list: [],
-      //s: [" ","FERIAS","AFASTADO","LICENÇA"],
       anterior:{},
       penultimo:{},
       ipt: this.getReal.hora,
