@@ -1,6 +1,6 @@
 <!-- domingo.vue -->
 <template>
-	<p>{{display}}</p>
+	<router-link :to="{name:'Semanal', query:{week:W}}"><p>{{display}}</p></router-link>
 </template>
 <script>
 import moment from 'moment'
