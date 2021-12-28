@@ -145,7 +145,7 @@ export default {
       return this.$route.params.setor + "/organico";
     },
     func() {
-      return this.$route.params.setor + "/funcoes";
+      return this.$route.params.setor + "/funcao";
     },
     week: function () {
       var weeks = [];
