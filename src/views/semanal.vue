@@ -1,7 +1,6 @@
 <template>
   <div class="main">
-    <hora-semana :texto="mapp[0]" :colabs="colabs" />
-    <hora-semana :texto="mapp[1]" :colabs="colabs" />
+        <hora-semana v-for="block in mapp" :texto="block[0].hora" :class="{'is-hidden':block[0].hora==0}" :colabs="block" :key="mapp.indexOf(block)" />
   </div>
 </template>
 <script>
@@ -22,12 +21,27 @@ export default {
     url() {
       return `${this.$route.params.setor}/organico`;
     },
-    mapp(){
-        // map para separar por horario de forma unica para cada colanvorador
-        let ret = []
+    mapp() {
+      //map para separar por horario de forma unica para cada colanvorador
+        let data = []
         const ddb = this.colabs
-        ddb.map(e => ret.push(e.domingos[this.$route.query.week].hora))
-        return ret
+        ddb.map((e) => (data.push({nome:e.nome,mat:e.mat,hora:e.domingos[this.$route.query.week].hora})))
+        
+      /*
+      [
+        { nome: "João", mat: "A" },
+        { nome: "pedro", mat: "A" },
+        { nome: "maria", mat: "B" },
+        { nome: "carlos", mat: "C" },
+      ];
+      */
+
+      const uniqueTipos = [...new Set(data.map((item) => item.hora))];
+      console.log(uniqueTipos)
+      const filterByTipo = (hora) => data.filter((item) => item.hora === hora);
+     
+      const groupedByTipo = uniqueTipos.map(filterByTipo);
+      return groupedByTipo
     },
   },
   watch: {
