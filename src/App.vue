@@ -1,47 +1,20 @@
 <template>
   <div class="wrap">
     <nav class="navbar is-dark prnt" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <div class="navbar-item">
-          Selecione Setor:  
-          </div>
-          <div class="navbar-item">
-            <div class="select">
-              <select v-model="setor">
-                <option v-for="set in setores" >{{ set }}</option>
-              </select>
-            </div>
-          </div>
+        <div class="navbar-brand ml-4">
+          <router-link class="navbar-item" to="/"><span class="icon"><i class="fa fa-3x fa-home"></i></span></router-link>
         </div>
-        <div class="navbar-item">
-          <router-link class="has-text-white" to="/">Inicio</router-link>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div v-show="Boolean(setor)" class="buttons">
+        <div class="navbar-end mr-2 my-auto">
               <router-link
-                class="button"
-                :to="{ 
-                  name: 'Mensal',
-                  params: { setor },
-                }"
-              >
-                Mensal
-              </router-link>
-              <router-link
-                class="button"
+                class="navbar-item has-background-white has-text-black is-size-4 has-text-weight-light my-1"
+                
                 :to="{
                   name: 'Organico',
-                  params: { setor },
+                  params: { setor:$route.params.setor },
                 }"
-                >Orgânico
-                </router-link
-              >
-            </div>
-          </div>
+                >Organico
+                </router-link>
         </div>
-      </div>
     </nav>
     <router-view></router-view>
   </div>
@@ -54,8 +27,12 @@ export default {
   data() {
     return {
       setores: ["mercearia", "cpd", "salgado", "frente_de_loja","limpeza"],
-      setor: null,
     };
+  },
+  computed:{
+    setor(){
+      this.$route.params.setor
+    }
   },
 };
 </script>
@@ -65,4 +42,8 @@ export default {
     display: none
   }
 }
+a:hover {
+  color: white;
+}
+
 </style>

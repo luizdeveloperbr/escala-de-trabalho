@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img :src="text" :style="{ width: med, heigth: med }" />
+    <div class="buttons">
+      <router-link class="button" v-for="s in $parent.setores" :to="{name:'Mensal',params:{setor:s}}">{{s}}</router-link>
+    </div>
   </div>
 </template>
 <script>
