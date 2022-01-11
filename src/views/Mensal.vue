@@ -84,7 +84,7 @@
                 </td>
                 <td v-if="condFivDom">folga</td>
               </tr>
-              <tr v-for="colab in banco" :class="{ 'is-selected': colab.edit }">
+              <tr v-for="colab in banco" :class="{ 'is-selected': colab.edit }" :key="banco.indexOf(colab)">
                 <td class="prnt">
                   <a
                     style="color: black !important"

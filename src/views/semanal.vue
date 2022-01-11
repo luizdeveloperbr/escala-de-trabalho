@@ -1,9 +1,19 @@
 <template>
   <div class="main">
-        <hora-semana v-for="block in mapp" :texto="block[0].hora" :class="{'is-hidden':block[0].hora==0}" :colabs="block" :key="mapp.indexOf(block)" />
+    <div class="has-text-centered mx-6">
+      <p class="is-size-3">{{ showDate }}</p>
+    </div>
+    <hora-semana
+      v-for="block in mapp"
+      :texto="block[0].hora"
+      :class="{ 'is-hidden': block[0].hora == 0 }"
+      :colabs="block"
+      :key="mapp.indexOf(block)"
+    />
   </div>
 </template>
 <script>
+import moment from "moment";
 import horaSemana from "../components/horaSemana.vue";
 import { db } from "../db";
 const banco = db.ref("setores");
@@ -14,7 +24,6 @@ export default {
   data() {
     return {
       colabs: [],
-      text: "String",
     };
   },
   computed: {
@@ -23,25 +32,31 @@ export default {
     },
     mapp() {
       //map para separar por horario de forma unica para cada colanvorador
-        let data = []
-        const ddb = this.colabs
-        ddb.map((e) => (data.push({nome:e.nome,mat:e.mat,hora:e.domingos[this.$route.query.week].hora})))
-        
-      /*
-      [
-        { nome: "João", mat: "A" },
-        { nome: "pedro", mat: "A" },
-        { nome: "maria", mat: "B" },
-        { nome: "carlos", mat: "C" },
-      ];
-      */
+      let data = [];
+      const ddb = this.colabs;
+      ddb.map((e) =>
+        data.push({
+          nome: e.nome,
+          mat: e.mat,
+          cargo: e.funcao.cargo,
+          hora: e.domingos[this.$route.query.week].hora,
+          dia:e.domingos[this.$route.query.week].dia,
+        })
+      );
 
       const uniqueTipos = [...new Set(data.map((item) => item.hora))];
-      console.log(uniqueTipos)
+      console.log(uniqueTipos);
       const filterByTipo = (hora) => data.filter((item) => item.hora === hora);
-     
+
       const groupedByTipo = uniqueTipos.map(filterByTipo);
-      return groupedByTipo
+      return groupedByTipo;
+    },
+    showDate() {
+      var getWeek = moment().week(this.$route.query.week).toDate();
+      return moment(getWeek)
+        .add(2, "w")
+        .subtract(2, "d")
+        .format("dddd, DD MMMM YYYY");
     },
   },
   watch: {

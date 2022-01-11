@@ -9,7 +9,7 @@
               @change="updateHora(false)"
               v-model="ipt"
             >
-              <option v-for="h in list">
+              <option v-for="h in list" :key="list.indexOf(h)">
                 {{ h.hora }}
               </option>
             </select>
@@ -48,11 +48,15 @@ export default {
   computed: {
     allow() {
       var ant = this.anterior.hora;
+      var pen = this.penultimo.hora;
+      // fix virada de ano mes 11 > mes 0
+      ///if(pen !== ){
       if (ant == false) {
         return false;
       } else {
-        return Boolean(this.penultimo.hora) == Boolean(ant);
+        return Boolean(pen) == Boolean(ant);
       }
+     // }//fix
     }
   },
   methods: {

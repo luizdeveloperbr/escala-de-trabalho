@@ -57,7 +57,7 @@ export default {
     },
    max() {
       return moment(this.anterior.dia, "YYYY-MM-DD")
-        .add(9, "days")
+        .add(8, "days")
         .format("YYYY-MM-DD");
     },
     min() {
