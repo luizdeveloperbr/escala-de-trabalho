@@ -1,21 +1,43 @@
 <template>
-  <div class="main">
-    <div class="has-text-centered mx-6">
-      <p class="is-size-3">{{ showDate }}</p>
+  <div class="panel" style="margin:20px">
+    <div class="panel-heading">
+     <div class="level">
+        <div class="level-left">
+          <img class="level-item" :src="logo" />
+        </div>
+        <div class="level-right">
+          <p class="content is-small">
+            LIDER COMERCIO E IND. LTDA <br />ROD BR-316 KM 02 - GUANABARA -
+            ANANINDEUA <br />(91) 4008-1012 | CNPJ: 05.054.671/0014-73
+          </p>
+        </div>
+      </div>
+      <div class="columns">
+      <div class="has-text-centered column mx-6">
+        <p class="is-size-3 is-capitalized">
+          Setor: {{ $parent.$route.params.setor }}
+        </p>
+      </div>
+      <div class="has-text-centered column mx-6">
+        <p class="is-size-3 is-capitalized">{{ showDate }}</p>
+      </div>
+      </div>
     </div>
-    <hora-semana
-      v-for="block in mapp"
-      :texto="block[0].hora"
-      :class="{ 'is-hidden': block[0].hora == 0 }"
-      :colabs="block"
-      :key="mapp.indexOf(block)"
-    />
+    <div class="panel-block" style="display: block!important">
+      <hora-semana
+        v-for="block in mapp"
+        :texto="block[0].hora"
+        :class="{ 'is-hidden': block[0].hora == 0 }"
+        :colabs="block"
+        :key="mapp.indexOf(block)"
+      />
+    </div>
   </div>
 </template>
 <script>
 import moment from "moment";
 import horaSemana from "../components/horaSemana.vue";
-import { db } from "../db";
+import { db, storage } from "../db";
 const banco = db.ref("setores");
 export default {
   components: { horaSemana },
@@ -24,6 +46,7 @@ export default {
   data() {
     return {
       colabs: [],
+      logo:""
     };
   },
   computed: {
@@ -40,7 +63,7 @@ export default {
           mat: e.mat,
           cargo: e.funcao.cargo,
           hora: e.domingos[this.$route.query.week].hora,
-          dia:e.domingos[this.$route.query.week].dia,
+          dia: e.domingos[this.$route.query.week].dia,
         })
       );
 
@@ -58,6 +81,10 @@ export default {
         .subtract(2, "d")
         .format("dddd, DD MMMM YYYY");
     },
+  },
+    async mounted() {
+    const url = await storage.ref("image.jpg").getDownloadURL();
+    this.logo = url;
   },
   watch: {
     url: {

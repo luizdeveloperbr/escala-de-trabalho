@@ -72,6 +72,7 @@
         <div class="box">
           <table class="table is-fullwidth">
             <thead>
+              <th>Editar</th>
               <th>Matricula</th>
               <th>Nome</th>
               <th>Função</th>
@@ -80,6 +81,11 @@
             </thead>
             <tbody>
               <tr v-for="c in banco">
+                <td>
+                  <button class="button" @click="confirm = c['.key'];edit(c)">
+                    <span><i class="fas fa-user-edit"></i></span>
+                  </button>
+                </td>
                 <td>{{ c.mat }}</td>
                 <td>{{ c.nome }}</td>
                 <td>{{ c.funcao.cargo }}</td>
@@ -87,7 +93,10 @@
                 <td>
                   <button
                     class="delete is-medium"
-                    @click="confirm = c['.key'];modal = true"
+                    @click="
+                      confirm = c['.key'];
+                      modal = true;
+                    "
                   ></button>
                 </td>
               </tr>
@@ -98,27 +107,37 @@
     </div>
     <div class="modal" :class="{ 'is-active': modal }">
       <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="message">
-            <div class="message-header">
-              <h2>Confirmar Exclusão</h2>
-            </div>
-            <div class="message-body">
-              <div class="block">
+      <div class="modal-content">
+        <div class="message">
+          <div class="message-header">
+            <h2>Confirmar Exclusão</h2>
+          </div>
+          <div class="message-body">
+            <div class="block">
               <h2>Deseja Excluir o Colaborador?</h2>
-              </div>
-              <div class="buttons is-centered">
-                <button class="button is-success" @click="rem(confirm);modal = false">Sim</button>
-                <button class="button is-danger" @click="modal = false">Não</button>
-              </div>
+            </div>
+            <div class="buttons is-centered">
+              <button
+                class="button is-success"
+                @click="
+                  rem(confirm);
+                  modal = false;
+                "
+              >
+                Sim
+              </button>
+              <button class="button is-danger" @click="modal = false">
+                Não
+              </button>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import {db} from "../db.js";
+import { db } from "../db.js";
 import status from "../components/status.vue";
 const setor = db.ref("setores");
 export default {
@@ -129,7 +148,7 @@ export default {
       horario: [],
       mat: "",
       modal: false,
-      confirm:"",
+      confirm: "",
       nome: "",
       funcao: "",
       fun: [],
@@ -158,7 +177,7 @@ export default {
   },
   methods: {
     addColab() {
-         return db
+      return db
         .ref("setores/" + this.$route.params.setor + "/organico")
         .push({
           mat: this.mat,
@@ -171,6 +190,14 @@ export default {
         })
         .then(this.clearAdd());
     },
+    edit(e){
+      this.mat = e.mat;
+      this.nome = e.nome;
+      this.funcao = {cargo:e.funcao.cargo};
+      this.hora = e.hora;
+      return this.rem(this.confirm)
+
+    },
     clearAdd() {
       this.mat = null;
       this.nome = null;
@@ -179,11 +206,11 @@ export default {
       return console.log("limpo");
     },
     rem(e) {
- return db
+      return db
         .ref(`setores/${this.$route.params.setor}/organico`)
         .child(e)
-        .remove()
-  }
+        .remove();
+    },
   },
   watch: {
     id: {
@@ -205,8 +232,7 @@ export default {
 };
 </script>
 <style>
-button.delete:hover
-{
-background:red
+button.delete:hover {
+  background: red;
 }
 </style>

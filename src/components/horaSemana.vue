@@ -5,17 +5,24 @@
       <tr>
         <td
           colspan="5"
-          class="py-0 has-background-dark has-text-white has-text-centered"
+          class=" has-background-dark has-text-white has-text-centered"
         >
-          <p class="is-size-5">{{texto}}</p>
+          <p class="is-size-5"> <span class="has-text-weight-bold">Horario:</span> {{texto}}</p>
         </td>
       </tr>
+      <tr class="has-background-grey-light has-text-weight-bold" id="head">
+        <td>MAT</td>
+        <td>COLABORADOR</td>
+        <td>FUNÇÃO</td>
+        <td>FOLGA</td>
+        <td>ASSINATURA</td>
+      </tr>
       <tr v-for="colab in colabs" :key="colabs.indexOf(colab)">
-        <td>{{ colab.mat }}</td>
-        <td>{{ colab.nome }}</td>
-        <td>{{ colab.cargo }}</td>
-        <td>{{ colab.dia | moment("ddd, DD/MMM") }}</td>
-        <td style="min-width: 150px"></td>
+        <td class="mat">{{ colab.mat }}</td>
+        <td class="nome">{{ colab.nome }}</td>
+        <td class="cargo">{{ colab.cargo }}</td>
+        <td class="dia">{{ colab.dia | moment("ddd, DD/MMM") }}</td>
+        <td style="width: 350px"></td>
       </tr>
     </table>
   </div>
@@ -30,3 +37,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+.mat{
+  width: 100px
+}
+.nome{
+  min-width: 350px;
+}
+#head>td{
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+</style>

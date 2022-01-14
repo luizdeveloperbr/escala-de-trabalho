@@ -33,7 +33,7 @@
           </tr>
           <tr>
             <td>
-              <p class="is-uppercase">{{ monthpick }} de 2021</p>
+              <p class="is-uppercase">{{ monthpick }} de 2022</p>
             </td>
           </tr>
         </table>
