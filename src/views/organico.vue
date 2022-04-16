@@ -48,9 +48,9 @@
                 </div>
                 <div class="control">
                   <div class="select">
-                    <select v-model="hora">
-                      <option v-for="h in horario" :value="h.cod">
-                        {{ h.hora }}
+                    <select v-model="folga">
+                      <option v-for="h in weekDays" :value="h">
+                        {{ h }}
                       </option>
                     </select>
                   </div>
@@ -139,25 +139,23 @@
 <script>
 import { db } from "../db.js";
 import status from "../components/status.vue";
+import moment from 'moment';
 const setor = db.ref("setores");
 export default {
   name: "organico",
   data: function () {
     return {
       banco: [],
-      horario: [],
+      weekDays: moment.weekdays(),
       mat: "",
       modal: false,
       confirm: "",
       nome: "",
       funcao: "",
       fun: [],
-      hora: "",
+      folga: "",
       setor: null,
     };
-  },
-  firebase: {
-    horario: db.ref("horarios/semana"),
   },
   computed: {
     id() {
@@ -183,7 +181,7 @@ export default {
           mat: this.mat,
           nome: this.nome,
           funcao: this.funcao,
-          hora: this.hora,
+          folga: this.folga,
           edit: false,
           status: 0,
           domingos: this.week,

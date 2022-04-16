@@ -45,44 +45,44 @@
         </div>
       </div>
     </div>
-    <div class="panel-block" style="display: block !important">
+    <div class="panel-block">
       <div>
         <div class="wrap">
           <div class="table-container">
-            <table class="table is-bordered">
+            <table class="table is-bordered is-fullwidth">
               <tr id="head-list" class="has-text-centered">
                 <td class="prnt"></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td>Domingo</td>
-                <td></td>
+                <!-- <td></td> -->
                 <td>Domingo</td>
-                <td></td>
+                <!-- <td></td> -->
                 <td>Domingo</td>
-                <td></td>
+                <!-- <td></td> -->
                 <td>Domingo</td>
-                <td></td>
+                <!-- <td></td> -->
                 <td v-if="condFivDom">Domingo</td>
-                <td v-if="condFivDom"></td>
+                <!-- <td v-if="condFivDom"></td> -->
               </tr>
               <tr id="head-list" class="has-text-centered">
                 <td class="prnt"></td>
                 <td class="mat-ret">Matricula</td>
                 <td>Colaborador</td>
-                <td class="mat-ret">Retorno</td>
+                <td class="mat-ret">Folga Fixa</td>
                 <td><domingo add-weeks="0" ref="d_0"></domingo></td>
-                <td>folga</td>
+                <!-- <td>folga</td> -->
                 <td><domingo add-weeks="1" ref="d_1"></domingo></td>
-                <td>folga</td>
+                <!-- <td>folga</td> -->
                 <td><domingo add-weeks="2" ref="d_2"></domingo></td>
-                <td>folga</td>
+                <!-- <td>folga</td> -->
                 <td><domingo add-weeks="3" ref="d_3"></domingo></td>
-                <td>folga</td>
+                <!-- <td>folga</td> -->
                 <td v-show="condFivDom">
                   <domingo add-weeks="4" ref="d_4"></domingo>
                 </td>
-                <td v-if="condFivDom">folga</td>
+                <!-- <td v-if="condFivDom">folga</td> -->
               </tr>
               <tr v-for="colab in banco" :class="{ 'is-selected': colab.edit }" :key="banco.indexOf(colab)">
                 <td class="prnt">
@@ -99,7 +99,7 @@
                 <td>
                   {{ colab.nome }}
                 </td>
-                <td>{{ colab.hora }}</td>
+                <td>{{ colab.folga }}</td>
                 <td class="has-text-centered">
                   <horario
                     v-if="colab.edit"
@@ -111,7 +111,7 @@
                     colab.domingos[$refs.d_0.W].hora || s[colab.status]
                   }}</span>
                 </td>
-                <td class="has-text-centered">
+                <!-- <td class="has-text-centered">
                   <folga
                     v-if="colab.edit"
                     :get-value="colab['.key']"
@@ -120,7 +120,7 @@
                   <span v-else>{{
                     colab.domingos[$refs.d_0.W].dia | moment("ddd, DD/MMM")
                   }}</span>
-                </td>
+                </td> -->
                 <td class="has-text-centered">
                   <horario
                     v-if="colab.edit"
@@ -132,7 +132,7 @@
                     colab.domingos[$refs.d_1.W].hora || s[colab.status]
                   }}</span>
                 </td>
-                <td class="has-text-centered">
+                <!-- <td class="has-text-centered">
                   <folga
                     v-if="colab.edit"
                     :get-value="colab['.key']"
@@ -141,7 +141,7 @@
                   <span v-else>{{
                     colab.domingos[$refs.d_1.W].dia | moment("ddd, DD/MMM")
                   }}</span>
-                </td>
+                </td> -->
                 <td class="has-text-centered">
                   <horario
                     v-if="colab.edit"
@@ -153,7 +153,7 @@
                     colab.domingos[$refs.d_2.W].hora || s[colab.status]
                   }}</span>
                 </td>
-                <td class="has-text-centered">
+                <!-- <td class="has-text-centered">
                   <folga
                     v-if="colab.edit"
                     :get-value="colab['.key']"
@@ -162,7 +162,7 @@
                   <span v-else>{{
                     colab.domingos[$refs.d_2.W].dia | moment("ddd, DD/MMM")
                   }}</span>
-                </td>
+                </td> -->
                 <td class="has-text-centered hora">
                   <horario
                     v-if="colab.edit"
@@ -174,7 +174,7 @@
                     colab.domingos[$refs.d_3.W].hora || s[colab.status]
                   }}</span>
                 </td>
-                <td class="has-text-centered">
+                <!-- <td class="has-text-centered">
                   <folga
                     v-if="colab.edit"
                     :get-value="colab['.key']"
@@ -183,7 +183,7 @@
                   <span v-else>{{
                     colab.domingos[$refs.d_3.W].dia | moment("ddd, DD/MMM")
                   }}</span>
-                </td>
+                </td> -->
                 <td class="has-text-centered hora" v-if="condFivDom">
                   <horario
                     v-if="colab.edit"
@@ -195,7 +195,7 @@
                     colab.domingos[$refs.d_4.W].hora || s[colab.status]
                   }}</span>
                 </td>
-                <td v-if="condFivDom" class="dia has-text-centered">
+                <!-- <td v-if="condFivDom" class="dia has-text-centered">
                   <folga
                     v-if="colab.edit"
                     :get-value="colab['.key']"
@@ -204,7 +204,7 @@
                   <span v-else>{{
                     colab.domingos[$refs.d_4.W].dia | moment("ddd, DD/MMM")
                   }}</span>
-                </td>
+                </td> -->
               </tr>
             </table>
           </div>
@@ -233,7 +233,7 @@ import moment from "moment";
 import { db, storage } from "../db";
 import domingo from "../components/domingo.vue";
 import horario from "../components/horario.vue";
-import folga from "../components/folga.vue";
+// import folga from "../components/folga.vue";
 const setores = db.ref("setores");
 export default {
   name: "Mensal",
@@ -272,7 +272,7 @@ export default {
   components: {
     domingo,
     horario,
-    folga,
+    // folga,
   },
   watch: {
     id: {

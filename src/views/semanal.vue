@@ -1,7 +1,7 @@
 <template>
   <div class="panel" style="margin:20px">
     <div class="panel-heading">
-     <div class="level">
+      <div class="level">
         <div class="level-left">
           <img class="level-item" :src="logo" />
         </div>
@@ -13,24 +13,19 @@
         </div>
       </div>
       <div class="columns">
-      <div class="has-text-centered column mx-6">
-        <p class="is-size-3 is-capitalized">
-          Setor: {{ $parent.$route.params.setor }}
-        </p>
-      </div>
-      <div class="has-text-centered column mx-6">
-        <p class="is-size-3 is-capitalized">{{ showDate }}</p>
-      </div>
+        <div class="has-text-centered column mx-6">
+          <p class="is-size-3 is-capitalized">
+            Setor: {{ $parent.$route.params.setor }}
+          </p>
+        </div>
+        <div class="has-text-centered column mx-6">
+          <p class="is-size-3 is-capitalized">{{ showDate }}</p>
+        </div>
       </div>
     </div>
     <div class="panel-block" style="display: block!important">
-      <hora-semana
-        v-for="block in mapp"
-        :texto="block[0].hora"
-        :class="{ 'is-hidden': block[0].hora == 0 }"
-        :colabs="block"
-        :key="mapp.indexOf(block)"
-      />
+      <hora-semana v-for="block in mapp" :texto="block[0].hora" :class="{ 'is-hidden': block[0].hora == 0 }"
+        :colabs="block" :key="mapp.indexOf(block)" />
     </div>
   </div>
 </template>
@@ -46,7 +41,7 @@ export default {
   data() {
     return {
       colabs: [],
-      logo:""
+      logo: ""
     };
   },
   computed: {
@@ -68,7 +63,6 @@ export default {
       );
 
       const uniqueTipos = [...new Set(data.map((item) => item.hora))];
-      console.log(uniqueTipos);
       const filterByTipo = (hora) => data.filter((item) => item.hora === hora);
 
       const groupedByTipo = uniqueTipos.map(filterByTipo);
@@ -77,12 +71,11 @@ export default {
     showDate() {
       var getWeek = moment().week(this.$route.query.week).toDate();
       return moment(getWeek)
-        .add(2, "w")
-        .subtract(2, "d")
+        .add({ day: 1, week: 1 })
         .format("dddd, DD MMMM YYYY");
     },
   },
-    async mounted() {
+  async mounted() {
     const url = await storage.ref("image.jpg").getDownloadURL();
     this.logo = url;
   },
