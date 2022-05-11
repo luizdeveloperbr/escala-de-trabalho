@@ -4,3 +4,4 @@ Proibido mais de 2 domingos consecutivos
 
 proibido mais de 8 dias initerrupitos de serviço ( sem folga )
 
+[Demo](https://escalaliderv2.netlify.app)
