@@ -26,7 +26,8 @@ export default {
     return {
       colaboradores: {},
       list: ["disponivel", "ferias", "afastado", "licença"],
-      sel: 0,
+      sel: 0
+      // sel: this.colaboradores.status,
     };
   },
   watch: {

@@ -21,7 +21,7 @@
         <td class="mat">{{ colab.mat }}</td>
         <td class="nome">{{ colab.nome }}</td>
         <td class="cargo">{{ colab.cargo }}</td>
-        <td class="dia">{{ colab.dia | moment("ddd, DD/MMM") }}</td>
+        <td class="dia">{{ colab.folga }}</td>
         <td style="width: 350px"></td>
       </tr>
     </table>

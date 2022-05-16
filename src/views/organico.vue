@@ -44,7 +44,7 @@
               </div>
               <div class="field has-addons" style="width: 250px">
                 <div class="control">
-                  <a class="button is-static">Horario Semanal</a>
+                  <a class="button is-static">Folga Fixa</a>
                 </div>
                 <div class="control">
                   <div class="select">

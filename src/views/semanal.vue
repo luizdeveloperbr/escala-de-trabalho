@@ -58,7 +58,7 @@ export default {
           mat: e.mat,
           cargo: e.funcao.cargo,
           hora: e.domingos[this.$route.query.week].hora,
-          dia: e.domingos[this.$route.query.week].dia,
+          folga: e.folga,
         })
       );
 
@@ -70,8 +70,9 @@ export default {
     },
     showDate() {
       var getWeek = moment().week(this.$route.query.week).toDate();
+      console.log(getWeek)
       return moment(getWeek)
-        .add({ day: 1, week: 1 })
+        .add({ day: -1, week: 2 })
         .format("dddd, DD MMMM YYYY");
     },
   },
@@ -86,9 +87,6 @@ export default {
         this.$rtdbBind("colabs", banco.child(url));
       },
     },
-  },
-  components: {
-    horaSemana,
   },
 };
 </script>
