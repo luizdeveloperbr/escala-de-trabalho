@@ -19,7 +19,7 @@
           </p>
         </div>
         <div class="has-text-centered column mx-6">
-          <p class="is-size-3 is-capitalized">{{ showDate }}</p>
+          <!--<p class="is-size-3 is-capitalized">{{ showDate }}</p>-->
         </div>
       </div>
     </div>
@@ -69,12 +69,9 @@ export default {
       return groupedByTipo;
     },
     showDate() {
-      var getWeek = moment().week(this.$route.query.week).toDate();
-      console.log(getWeek)
-      return moment(getWeek)
-        .add({ day: -1, week: 2 })
-        .format("dddd, DD MMMM YYYY");
-    },
+return moment(moment().isoWeek(+this.$route.params.week).toDate()).format("dddd, DD MMMM YYYY");
+
+     },
   },
   async mounted() {
     const url = await storage.ref("image.jpg").getDownloadURL();

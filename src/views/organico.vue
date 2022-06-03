@@ -88,7 +88,8 @@
                 </td>
                 <td>{{ c.mat }}</td>
                 <td>{{ c.nome }}</td>
-                <td>{{ c.funcao.cargo }}</td>
+                <td v-if="c.funcao.cargo">{{ c.funcao.cargo }}</td>
+                <td v-else>EXCLUIR</td>
                 <td><status :get-real="c['.key']"></status></td>
                 <td>
                   <button
